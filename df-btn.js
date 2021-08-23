@@ -54,8 +54,11 @@ else {
         height: 48px;
     
     }
-
-    .df-btn-text:hover {
+    .df-btn-hide {
+        display:none;
+    }
+    .df-btn-text:hover + .df-btn-hide {
+        display: inline;
     }
 
     .df-btn-text:before {
@@ -63,7 +66,7 @@ else {
         height: 48px;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 40px;
+        background-size: 24px;
         background-image: url('${config.logo || origin + '/assets/logo.svg'}');
         content: '';
     
@@ -88,7 +91,7 @@ else {
     }
 
     .df-btn:not(.df-closed) > .df-btn-text:before {
-        background-image: url('assets/close.svg');
+        background-image: url('assets/min_1.svg');
     
     }
 
@@ -191,15 +194,20 @@ else {
     document.head.appendChild(style)
     document.write(`
         <button class="df-btn df-closed" onclick="dfToggle()">
-            <div class="df-btn-text">${config.openText || 'Chat'}</div>
+            <span class="df-btn-text"></span>
+            <span class = "df-btn-hide">${config.openText || 'Chat'}</span>
             <iframe id="myFrame" class="df-btn-content" src="${config.project}" allow= "microphone;" allowtransparency="false"></iframe>
         </button>
     `)
 
     let dfToggled = false
+    let hasSeen = false
     window.dfToggle = () => {
-        document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn'
-        document.querySelector('.df-btn-text').innerText = dfToggled ? (config.openText || 'Chat') : (config.closeText || 'Close')
+        hasSeen ? config.project = "https://lts-bot-prayas.web.app": config.project = "bot_intro.html"
+        hasSeen = true
+        document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn df-btn-hover'
+        // below lind is not useful from now onwards and can be removed as it contains empty values
+        document.querySelector('.df-btn-text').innerText = dfToggled ? ('' || '') : ("" || '')
         dfToggled = !dfToggled
         if (document.querySelector('.df-btn').classList == 'df-btn df-closed' ) {
               document.getElementById("myFrame").src = "https://wwf.org";
@@ -213,4 +221,3 @@ else {
 
 
 }
-
