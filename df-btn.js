@@ -57,6 +57,8 @@ else {
     .df-btn-hide {
         display:none;
     }
+    .df-apply-hover:hover + .df-btn-hide {
+    }
     .df-btn-text:hover + .df-btn-hide {
         display: inline;
     }
@@ -202,13 +204,16 @@ else {
 
     let dfToggled = false
     let hasSeen = false
+    let hoverApplied = true
     window.dfToggle = () => {
-        hasSeen ? config.project = "https://lts-bot-prayas.web.app": config.project = "bot_intro.html"
+        hasSeen ? config.project = "https://lts-bot-prayas.web.app" : config.project = "bot_intro.html"
         hasSeen = true
-        document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn df-btn-hover'
-        // below lind is not useful from now onwards and can be removed as it contains empty values
+        document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn'
+        // below line is not useful from now onwards and can be removed as it contains empty values
         document.querySelector('.df-btn-text').innerText = dfToggled ? ('' || '') : ("" || '')
+        // document.querySelector('.df-btn-text').classList = hoverApplied ? document.querySelector('.df-btn-text').classList = 'df-btn-text df-apply-hover' : 'df-btn-text'
         dfToggled = !dfToggled
+        hoverApplied = !hoverApplied
         if (document.querySelector('.df-btn').classList == 'df-btn df-closed' ) {
               document.getElementById("myFrame").src = "https://wwf.org";
         }else{ document.getElementById("myFrame").src = config.project;
