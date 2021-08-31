@@ -30,7 +30,7 @@ else {
         box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149);
         font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background-color: ${config.background || '#FEFFFF'};
-        border-radius: 24px;
+        border-radius: 34px;
         cursor: pointer;
         transition: all .45s cubic-bezier(.4, 0, .2, 1);
         position: fixed;
@@ -44,40 +44,36 @@ else {
     }
 
     .df-btn-text {
-        min-width: 56px;
-        color: #3c4043;
+        min-width: 80px;
         display: inline-flex;
         align-items: center;
-        font-weight: 500;
-        padding: 0 24px 0 0;
-        font-size: 12px;
-        height: 48px;
+        padding: 2px 4px 2px 10px;
+        font-size: 25px;
+        height: 80px;
     
     }
     .df-btn-hide {
         display:none;
+        font-size: 25px;
+        padding: 4px 4px 4px 4px;
     }
-    .df-apply-hover:hover + .df-btn-hide {
-    }
-    .df-btn-text:hover + .df-btn-hide {
-        display: inline;
+
+    .df-closed > .df-btn-text:hover + .df-btn-hide  {
+        display: inline-flex;
+        
+        justify-content: flex-end;
     }
 
     .df-btn-text:before {
         min-width: 56px;
-        height: 48px;
+        height: 448px;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 24px;
+        background-size: 70px;
         background-image: url('${config.logo || origin + '/assets/logo.svg'}');
         content: '';
-    
     }
 
-    .df-btn:hover {
-        box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
-         opacity: 1
-    }
     button.df-btn:hover {
         opacity: 1 !important
     }
@@ -94,6 +90,7 @@ else {
 
     .df-btn:not(.df-closed) > .df-btn-text:before {
         background-image: url('assets/min_1.svg');
+        background-size: 24px;
     
     }
 
@@ -210,7 +207,7 @@ else {
         hasSeen = true
         document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn'
         // below line is not useful from now onwards and can be removed as it contains empty values
-        document.querySelector('.df-btn-text').innerText = dfToggled ? ('' || '') : ("" || '')
+        // document.querySelector('.df-btn-text').innerText = dfToggled ? ('' || '') : ("" || '')
         // document.querySelector('.df-btn-text').classList = hoverApplied ? document.querySelector('.df-btn-text').classList = 'df-btn-text df-apply-hover' : 'df-btn-text'
         dfToggled = !dfToggled
         hoverApplied = !hoverApplied
