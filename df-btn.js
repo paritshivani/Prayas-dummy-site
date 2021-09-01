@@ -47,31 +47,36 @@ else {
         min-width: 80px;
         display: inline-flex;
         align-items: center;
-        padding: 2px 4px 2px 10px;
-        font-size: 25px;
+        padding: 2px 4px 2px 4px;
+        font-size: 15px;
+        height: 45px;
+    }
+    .df-btn.df-closed .df-btn-text {
         height: 80px;
-    
     }
     .df-btn-hide {
         display:none;
-        font-size: 25px;
-        padding: 4px 4px 4px 4px;
+        font-size: 17px;
+        padding: 0px 0px 6px 8px;
     }
 
     .df-closed > .df-btn-text:hover + .df-btn-hide  {
         display: inline-flex;
         
-        justify-content: flex-end;
     }
 
     .df-btn-text:before {
-        min-width: 56px;
-        height: 448px;
+        min-width: 62px;
+        height: 70px;
         background-position: center;
         background-repeat: no-repeat;
         background-size: 70px;
         background-image: url('${config.logo || origin + '/assets/logo.svg'}');
         content: '';
+    }
+
+    .df-btn-text:hover:before {
+        padding : 0px 45px;
     }
 
     button.df-btn:hover {
@@ -89,7 +94,7 @@ else {
     }
 
     .df-btn:not(.df-closed) > .df-btn-text:before {
-        background-image: url('assets/min_1.svg');
+        background-image: url('assets/minus.svg');
         background-size: 24px;
     
     }
