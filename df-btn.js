@@ -30,7 +30,7 @@ else {
         box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149);
         font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         background-color: ${config.background || '#FEFFFF'};
-        border-radius: 24px;
+        border-radius: 34px;
         cursor: pointer;
         transition: all .45s cubic-bezier(.4, 0, .2, 1);
         position: fixed;
@@ -44,35 +44,41 @@ else {
     }
 
     .df-btn-text {
-        min-width: 56px;
-        color: #3c4043;
+        min-width: 80px;
         display: inline-flex;
         align-items: center;
-        font-weight: 500;
-        padding: 0 24px 0 0;
-        font-size: 12px;
-        height: 48px;
-    
+        padding: 2px 4px 2px 4px;
+        font-size: 15px;
+        height: 45px;
+    }
+    .df-btn.df-closed .df-btn-text {
+        height: 80px;
+    }
+    .df-btn-hide {
+        display:none;
+        font-size: 17px;
+        padding: 0px 0px 6px 8px;
     }
 
-    .df-btn-text:hover {
+    .df-closed > .df-btn-text:hover + .df-btn-hide  {
+        display: inline-flex;
+        
     }
 
     .df-btn-text:before {
-        min-width: 56px;
-        height: 48px;
+        min-width: 62px;
+        height: 70px;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 40px;
+        background-size: 70px;
         background-image: url('${config.logo || origin + '/assets/logo.svg'}');
         content: '';
-    
     }
 
-    .df-btn:hover {
-        box-shadow: 0 1px 3px 0 rgba(60,64,67,0.302), 0 4px 8px 3px rgba(60,64,67,0.149);
-         opacity: 1
+    .df-btn-text:hover:before {
+        padding : 0px 45px;
     }
+
     button.df-btn:hover {
         opacity: 1 !important
     }
@@ -88,7 +94,8 @@ else {
     }
 
     .df-btn:not(.df-closed) > .df-btn-text:before {
-        background-image: url('assets/close.svg');
+        background-image: url('assets/minus.svg');
+        background-size: 24px;
     
     }
 
@@ -191,16 +198,24 @@ else {
     document.head.appendChild(style)
     document.write(`
         <button class="df-btn df-closed" onclick="dfToggle()">
-            <div class="df-btn-text">${config.openText || 'Chat'}</div>
+            <span class="df-btn-text"></span>
+            <span class = "df-btn-hide">${config.openText || 'Chat'}</span>
             <iframe id="myFrame" class="df-btn-content" src="${config.project}" allow= "microphone;" allowtransparency="false"></iframe>
         </button>
     `)
 
     let dfToggled = false
+    let hasSeen = false
+    let hoverApplied = true
     window.dfToggle = () => {
+        hasSeen ? config.project = "https://lts-bot-prayas.web.app" : config.project = "bot_intro.html"
+        hasSeen = true
         document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn'
-        document.querySelector('.df-btn-text').innerText = dfToggled ? (config.openText || 'Chat') : (config.closeText || 'Close')
+        // below line is not useful from now onwards and can be removed as it contains empty values
+        // document.querySelector('.df-btn-text').innerText = dfToggled ? ('' || '') : ("" || '')
+        // document.querySelector('.df-btn-text').classList = hoverApplied ? document.querySelector('.df-btn-text').classList = 'df-btn-text df-apply-hover' : 'df-btn-text'
         dfToggled = !dfToggled
+        hoverApplied = !hoverApplied
         if (document.querySelector('.df-btn').classList == 'df-btn df-closed' ) {
               document.getElementById("myFrame").src = "https://wwf.org";
         }else{ document.getElementById("myFrame").src = config.project;
