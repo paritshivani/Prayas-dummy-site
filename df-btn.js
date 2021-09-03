@@ -20,7 +20,6 @@ const origin = config.src.substring(0, config.src.lastIndexOf('/'))
 if (!config.project){
     console.warn('Please specify your project ID in attributes!')
 }
-
 else {
     const style = document.createElement('style')
     style.innerHTML = `
@@ -71,7 +70,7 @@ else {
         background-position: center;
         background-repeat: no-repeat;
         background-size: 70px;
-        background-image: url('${config.logo || origin + '/assets/logo.svg'}');
+        background-image: url('${config.logo || origin + '/wp-content/chatbot/images/logo.svg'}');
         content: '';
     }
 
@@ -94,7 +93,7 @@ else {
     }
 
     .df-btn:not(.df-closed) > .df-btn-text:before {
-        background-image: url('assets/minus.svg');
+        background-image: url('wp-content/chatbot/images/minus.svg');
         background-size: 24px;
     
     }
@@ -187,11 +186,11 @@ else {
         }
 
         .df-btn-text:before {
-            background-image: url('${config.logoDark || origin + '/assets/logo_dark.svg'}')
+            background-image: url('${config.logoDark || origin + '/wp-content/chatbot/images/logo_dark.svg'}')
         }
 
         .df-btn:not(.df-closed) > .df-btn-text:before {
-            background-image: url('${origin}/assets/close_dark.svg')
+            background-image: url('${origin}/wp-content/chatbot/images/close_dark.svg')
         }
     }`
 
@@ -208,7 +207,7 @@ else {
     let hasSeen = false
     let hoverApplied = true
     window.dfToggle = () => {
-        hasSeen ? config.project = "https://lts-bot-prayas.web.app" : config.project = "bot_intro.html"
+        hasSeen ? config.project = "https://lts-bot-prayas.web.app" : config.project = "wp-content/chatbot/js/bot_intro.html"
         hasSeen = true
         document.querySelector('.df-btn').classList = dfToggled ? 'df-btn df-closed' : 'df-btn'
         // below line is not useful from now onwards and can be removed as it contains empty values
@@ -224,7 +223,4 @@ else {
         // if (document.querySelector('.df-btn').classList === df-btn df-closed ) {
         //     // document.querySelector("df-btn-content").src = config.project
         //     alert("here")
-        // }
-
-
 }
